@@ -116,3 +116,10 @@ jobs:
           exit-code: true
           summary: true
       - run: echo "✅ Docker Scout Analysis compare image status is ${{ job.status }}."
+
+    # setup-vexctl - Install vexctl and test presence in path
+      - name: Install vexctl and test presence in path
+        id: Install-and-Check-Install-vexctl
+        uses: openvex/setup-vexctl@main
+      - run: vexctl version
+      - run: echo "✅ Install vexctl and test presence status is ${{ job.status }}."
