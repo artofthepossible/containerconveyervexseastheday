@@ -123,11 +123,14 @@ jobs:
         uses: openvex/setup-vexctl@main
       - run: vexctl version
       - run: echo "✅ Install vexctl and test presence status is ${{ job.status }}."
+    
+    
 
-    # Generete VEX json file
+    # Upload VEX json file
       - name: Upload Vex document
         if: always()
         uses: actions/upload-artifact@v2
         with:
             name: Vex document
             path: "conveyor-vex.json"
+      - run: echo "✅ Upload VEX Document status is ${{ job.status }}."
