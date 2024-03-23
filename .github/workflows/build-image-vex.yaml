@@ -98,7 +98,6 @@ jobs:
         uses: docker/scout-action@v1
         with:
           command: quickview, cves, recommendations
-            --vex-location /usr/local/share/vex ${{ env.IMAGE_NAME }}
           image: ${{ steps.meta.outputs.tags }}
           sarif-file: sarif.output.json
           platform: "linux/arm64"
