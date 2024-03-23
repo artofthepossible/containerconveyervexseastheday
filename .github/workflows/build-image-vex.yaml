@@ -98,6 +98,7 @@ jobs:
         uses: docker/scout-action@v1
         with:
           command: quickview, cves, recommendations
+            --vex-location /usr/local/share/vex ${{ env.IMAGE_NAME }}
           image: ${{ steps.meta.outputs.tags }}
           sarif-file: sarif.output.json
           platform: "linux/arm64"
@@ -125,24 +126,12 @@ jobs:
       - run: echo "✅ Install vexctl and test presence status is ${{ job.status }}."
     
     
-    # Embed VEX documents as attestations
-      - name: Embed VEX documents
-        id: docker-scout-cves-Embed-VEX-documents
-        if: ${{ github.event_name != 'pull_request_target' }}
-        uses: docker/scout-action@v1
-        with:
-          command: docker scout attestation add
-            --file /usr/local/share/vex/example.vex.json \
-            --predicate-type https://openvex.dev/ns/v0.2.0 \
-          image: ${{ steps.meta.outputs.tags }}
-          platform: "linux/arm64"
-      - run: echo "✅ Docker Scout Embed VEX documents as attestations status is ${{ job.status }}."
-
+   
     # Upload VEX json file
       - name: Upload Vex document
         if: always()
         uses: actions/upload-artifact@v2
         with:
             name: Vex document
-            path: "/usr/local/share/vex/example.vex.json"
+            path: "/example.vex.json"
       - run: echo "✅ Upload VEX Document status is ${{ job.status }}."
