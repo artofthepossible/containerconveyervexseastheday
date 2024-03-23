@@ -130,8 +130,7 @@ jobs:
         #run: vexctl generate --output example.vex.json
         run: vexctl generate --product="pkg:apk/wolfi/git@2.38.1-r0?arch=x86_64" \
                --vuln="CVE-2014-123456" \
-               --status="not_affected" \
-               --justification="inline_mitigations_already_exist"
+               --status="not_affected"
         #run: vexctl generate "${{ inputs.product }}" --file="${{ inputs.file }}" --templates="${{ inputs.templates-dir }}"
       - run: echo "✅ Generate VEX Document status is ${{ job.status }}."
     
@@ -139,6 +138,7 @@ jobs:
       - name: Upload Vex document
         if: always()
         uses: actions/upload-artifact@v2
+        
         with:
             name: Vex document
             path: "/example.vex.json"
