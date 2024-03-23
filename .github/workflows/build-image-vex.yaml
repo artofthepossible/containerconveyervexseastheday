@@ -124,7 +124,17 @@ jobs:
       - run: vexctl version
       - run: echo "✅ Install vexctl and test presence status is ${{ job.status }}."
     
-    
+    # Embed VEX documents as attestations
+      - name: Embed VEX documents
+        id: Embed-VEX-documents
+        uses: docker/scout-action@v1
+        with:
+          command: attestation add
+            --file /usr/local/share/vex/example.vex.json \
+            --predicate-type https://openvex.dev/ns/v0.2.0 \
+          image: ${{ steps.meta.outputs.tags }}
+          sarif-file: sarif.output.json
+      - run: echo "✅ Docker Scout Embed VEX documents as attestations status is ${{ job.status }}."
 
     # Upload VEX json file
       - name: Upload Vex document
@@ -132,5 +142,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
             name: Vex document
-            path: "conveyor-vex.json"
+            path: "example.vex.json"
+            sarif-file: sarif.output.json
       - run: echo "✅ Upload VEX Document status is ${{ job.status }}."
