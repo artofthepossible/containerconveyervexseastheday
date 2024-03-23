@@ -129,7 +129,7 @@ jobs:
         id: Embed-VEX-documents
         uses: docker/scout-action@v1
         with:
-          command: attestation, add
+          command: attestation
             --file /usr/local/share/vex/example.vex.json \
             --predicate-type https://openvex.dev/ns/v0.2.0 \
           image: ${{ steps.meta.outputs.tags }}
