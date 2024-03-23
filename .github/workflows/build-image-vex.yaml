@@ -133,7 +133,6 @@ jobs:
             --file /usr/local/share/vex/example.vex.json \
             --predicate-type https://openvex.dev/ns/v0.2.0 \
           image: ${{ steps.meta.outputs.tags }}
-          sarif-file: sarif.output.json
       - run: echo "✅ Docker Scout Embed VEX documents as attestations status is ${{ job.status }}."
 
     # Upload VEX json file
@@ -142,6 +141,5 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
             name: Vex document
-            path: "example.vex.json"
-            sarif-file: sarif.output.json
+            path: "/usr/local/share/vex/example.vex.json"
       - run: echo "✅ Upload VEX Document status is ${{ job.status }}."
