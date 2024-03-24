@@ -130,15 +130,14 @@ jobs:
       - name: Generate VEX document
         id: Generate-VEX-Document
         #run: vexctl generate --output example.vex.json
-        run: vexctl create \
+        run: sudo vexctl create \
               --author="author@example.com" \
               --product="pkg:docker/artofthepossible/containerconveyervex@v1" \
-              --subcomponents="pkg:npm/express@4.17.1" \
-              --subcomponents="pkg:npm/qs@6.7.0" \
-              --vuln="CVE-2022-24999" \
+              --subcomponents="pkg:pip-23.0.1" \ 
+              --vuln="CVE-2023-5752" \
               --status="not_affected" \
               --justification="vulnerable_code_not_in_execute_path" \
-              --file="CVE-2022-24999.vex.json"
+              --file="CVE-2023-5752.vex.json"
         #run: vexctl generate "${{ inputs.product }}" --file="${{ inputs.file }}" --templates="${{ inputs.templates-dir }}"
       - run: echo "✅ Generate VEX Document status is ${{ job.status }}."
     
