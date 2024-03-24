@@ -134,7 +134,6 @@ jobs:
       #      product: pkg:generic/hello@${{ env.RELEASE_VERSION }}
       #- run: vexctl create "pkg:generic/product@1.0.0" CVE-2023-5752 fixed 
       - run: vexctl generate "pkg:apk/wolfi/git" CVE-2023-5752 fixed
-      
       - run: echo "✅ Run VEX status is ${{ job.status }}."
 
 
