@@ -130,7 +130,7 @@ jobs:
       - name: Generate VEX document
         id: Generate-VEX-Document
         #run: vexctl generate --output example.vex.json
-        run: ./vexctl create \
+        run: ./$GITHUB_PATH/vexctl create \
               --author="author@example.com" \
               --product="pkg:docker/artofthepossible/containerconveyervex@v1" \
               --subcomponents="pkg:pip-23.0.1" \ 
@@ -149,5 +149,5 @@ jobs:
             name: Vex document
             #path: "/example.vex.json"
             #path: "attachments/example.vex.json"
-            path: "attachments/CVE-2022-24999.vex.json"
+            path: "attachments/CVE-2023-5752.vex.json"
       - run: echo "✅ Upload VEX Document status is ${{ job.status }}."
