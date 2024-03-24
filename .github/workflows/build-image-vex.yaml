@@ -126,20 +126,15 @@ jobs:
       - run: vexctl version
       - run: echo "✅ Install vexctl and test presence status is ${{ job.status }}."
     
-    # Generate VEX document
-      - name: Generate VEX document
-        id: Generate-VEX-Document
-        #run: vexctl generate --output example.vex.json
-        run: ./$HOME/vexctl create \
-              --author="author@example.com" \
-              --product="pkg:docker/artofthepossible/containerconveyervex@v1" \
-              --subcomponents="pkg:pip-23.0.1" \ 
-              --vuln="CVE-2023-5752" \
-              --status="not_affected" \
-              --justification="vulnerable_code_not_in_execute_path" \
-              --file="CVE-2023-5752.vex.json"
-        #run: vexctl generate "${{ inputs.product }}" --file="${{ inputs.file }}" --templates="${{ inputs.templates-dir }}"
-      - run: echo "✅ Generate VEX Document status is ${{ job.status }}."
+    # Run-vexctl - Run vexctl 
+      - name: Run vexctl
+        id: Run-vexctl
+        uses: openvex/generate-vex@31b415924ea0d72ed5f2640f1dee59dea6c2770b
+        with:
+            product: pkg:generic/hello@${{ env.RELEASE_VERSION }}
+      - run: echo "✅ Run VEX status is ${{ job.status }}."
+
+
     
     # Upload VEX json file
       - name: Upload Vex document
