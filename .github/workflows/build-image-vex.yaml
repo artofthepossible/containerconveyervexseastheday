@@ -125,10 +125,7 @@ jobs:
         uses: openvex/setup-vexctl@main
       - run: vexctl version
       - run: echo "✅ Install vexctl and test presence status is ${{ job.status }}."
-    
-  
-
-    
+   
     # Upload VEX json file
       - name: Upload Vex document
         if: always()
@@ -140,3 +137,16 @@ jobs:
             #path: "attachments/CVE-2023-5752.vex.json"
             path: "attachments/in-toto.vex.json"
       - run: echo "✅ Upload VEX Document status is ${{ job.status }}."
+
+      # Docker Scout Attach the in-toto.vex.json VEX document as an attestation:
+      - name: Attach the in-toto.vex.json VEX document as an attestation
+        id: docker-scout-attestation
+        if: ${{ github.event_name != 'pull_request_target' }}
+        uses: docker/scout-action@v1.6.3
+        with:
+          command: attestations
+            --file attachments/in-toto.vex.json \
+            --predicate-type https://openvex.dev/ns/v0.2.0 \
+            artofthepossible/containerconveyervex:v1
+      - run: echo "✅ Docker Scout Attestations Attached status is ${{ job.status }}."
+  
