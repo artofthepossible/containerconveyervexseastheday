@@ -92,13 +92,7 @@ jobs:
           outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
       - run: echo "✅ Build and push Docker image status is ${{ job.status }}."
       
-    # Docker Scout Check Version
-      - name: Docker-Scout-Check-Version
-        id: docker-scout-check-version
-        uses: docker/scout-action@${{ env.SCOUT_VERSION }}
-      - run: docker scout version
-      - run: echo "✅ Docker Scout Version status is ${{ job.status }}."
-
+    
     # Docker Scout display a quickview, cves, recommendations output
       - name: Analyze for critical and high CVEs
         id: docker-scout-cves
