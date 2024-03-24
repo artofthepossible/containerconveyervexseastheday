@@ -139,7 +139,6 @@ jobs:
       - run: sudo ./vexctl create --product="pkg:pypi/blinker-1.7.0" \
              --vuln="CVE-2023-5752" \
              --status="fixed"
-
       - run: echo "✅ Run VEX status is ${{ job.status }}."
 
 
