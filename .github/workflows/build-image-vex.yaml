@@ -130,7 +130,7 @@ jobs:
       - name: Generate VEX document
         id: Generate-VEX-Document
         #run: vexctl generate --output example.vex.json
-        run: sudo vexctl create \
+        run: vexctl create \
               --author="author@example.com" \
               --product="pkg:docker/artofthepossible/containerconveyervex@v1" \
               --subcomponents="pkg:pip-23.0.1" \ 
