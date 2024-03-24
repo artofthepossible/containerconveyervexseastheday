@@ -152,7 +152,7 @@ jobs:
         if: ${{ github.event_name != 'pull_request_target' }}
         uses: docker/scout-action@v1.6.3
         with:
-          command: attestation
+          command: docker scout attestation add
             --file attachments/in-toto.vex.json \
             --predicate-type https://openvex.dev/ns/v0.2.0 \
             artofthepossible/containerconveyervex:v1
