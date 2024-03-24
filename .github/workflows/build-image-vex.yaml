@@ -15,6 +15,7 @@ env:
   SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
   # Use `latest` as the tag to compare to if empty, assuming that it's already pushed
   COMPARE_TAG: latest
+  SCOUT_VERSION: v1.6.3
 
 jobs:
   build:
@@ -94,15 +95,15 @@ jobs:
     # Docker Scout Check Version
       - name: Docker-Scout-Check-Version
         id: docker-scout-check-version
-        uses: docker/scout-action@v1
+        uses: docker/scout-action@${{ env.SCOUT_VERSION }}
       - run: docker scout version
-      - run: echo "✅ Docker Scout Analysis - QuickView, CVEs and Recommendations status is ${{ job.status }}."
+      - run: echo "✅ Docker Scout Version status is ${{ job.status }}."
 
     # Docker Scout display a quickview, cves, recommendations output
       - name: Analyze for critical and high CVEs
         id: docker-scout-cves
         if: ${{ github.event_name != 'pull_request_target' }}
-        uses: docker/scout-action@v1
+        uses: docker/scout-action@${{ env.SCOUT_VERSION }}
         with:
           command: quickview, cves, recommendations
           image: ${{ steps.meta.outputs.tags }}
@@ -115,7 +116,7 @@ jobs:
       - name: Docker Scout
         id: docker-scout
         if: ${{ github.event_name == 'pull_request' }}
-        uses: docker/scout-action@v1
+        uses: docker/scout-action@${{ env.SCOUT_VERSION }}
         with:
           command: compare
           image: ${{ steps.meta.outputs.tags }}
