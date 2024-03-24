@@ -130,9 +130,13 @@ jobs:
       - name: Run vexctl
         id: Run-vexctl
         uses: openvex/generate-vex@31b415924ea0d72ed5f2640f1dee59dea6c2770b
-        with:
-            product: pkg:generic/hello@${{ env.RELEASE_VERSION }}
-      - run: vexctl create "pkg:generic/product@1.0.0" CVE-2023-5752 fixed 
+      #  with:
+      #      product: pkg:generic/hello@${{ env.RELEASE_VERSION }}
+      #- run: vexctl create "pkg:generic/product@1.0.0" CVE-2023-5752 fixed 
+      - run: vexctl create --product="pkg:apk/wolfi/git@2.39.0-r1?arch=x86_64" \
+              --product="pkg:apk/wolfi/git@2.39.0-r1?arch=armv7" \
+              --vuln="CVE-2023-12345" \
+              --status="fixed"
       - run: echo "✅ Run VEX status is ${{ job.status }}."
 
 
