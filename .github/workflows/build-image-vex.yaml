@@ -133,10 +133,12 @@ jobs:
       #  with:
       #      product: pkg:generic/hello@${{ env.RELEASE_VERSION }}
       #- run: vexctl create "pkg:generic/product@1.0.0" CVE-2023-5752 fixed 
-      - run: vexctl generate --product="pkg:apk/wolfi/git" \
+      #- run: vexctl generate --product="pkg:apk/wolfi/git" \
+      #       --vuln="CVE-2023-5752" \
+      #       --status="fixed"
+      - run: sudo ./vexctl create --product="pkg:pypi/blinker-1.7.0" \
              --vuln="CVE-2023-5752" \
              --status="fixed"
-   
 
       - run: echo "✅ Run VEX status is ${{ job.status }}."
 
