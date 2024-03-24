@@ -159,5 +159,5 @@ jobs:
       # Docker Scout Attach the in-toto.vex.json VEX document as an attestation:
       - name: docker-scout-attestation
         run: |
-          docker scout attestation add --file attachments/in-toto.vex.json --predicate-type https://openvex.dev/ns/v0.2.0 artofthepossible/artofthepossible/docker-scout-conveyor-vex:v1
+          docker scout attestation add --file attachments/in-toto.vex.json --predicate-type https://openvex.dev/ns/v0.2.0 artofthepossible/artofthepossible/containerconveyervex:v1
       
