@@ -129,14 +129,18 @@ jobs:
     # Run-vexctl - Run vexctl 
       - name: Run vexctl
         id: Run-vexctl
-        uses: openvex/generate-vex@31b415924ea0d72ed5f2640f1dee59dea6c2770b
+        uses: openvex/generate-vex@main
       #  with:
       #      product: pkg:generic/hello@${{ env.RELEASE_VERSION }}
       #- run: vexctl create "pkg:generic/product@1.0.0" CVE-2023-5752 fixed 
-      - run: vexctl create --product="pkg:apk/wolfi/git@2.39.0-r1?arch=x86_64" \
-              --product="pkg:apk/wolfi/git@2.39.0-r1?arch=armv7" \
-              --vuln="CVE-2023-12345" \
-              --status="fixed"
+      - run: vexctl create \
+              --author="author@example.com" \
+              --product="pkg:docker/artofthepossible/containerconveyervex@v1" \
+              --subcomponents="pkg:pip-23.0.1" \ 
+              --vuln="CVE-2023-5752" \
+              --status="not_affected" \
+              --justification="vulnerable_code_not_in_execute_path" \
+              --file="CVE-2023-5752.vex.json"
       - run: echo "✅ Run VEX status is ${{ job.status }}."
 
 
