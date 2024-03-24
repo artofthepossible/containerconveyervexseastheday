@@ -1,4 +1,4 @@
-name: Docker
+name: build-image
 
 on:
   push:
@@ -91,6 +91,13 @@ jobs:
           outputs: ${{ github.event_name == 'pull_request' && 'type=cacheonly' || 'type=registry,push=true' }}
       - run: echo "✅ Build and push Docker image status is ${{ job.status }}."
       
+    # Docker Scout Check Version
+      - name: Docker-Scout-Check-Version
+        id: docker-scout-check-version
+        uses: docker/scout-action@v1
+      - run: docker scout version
+      - run: echo "✅ Docker Scout Analysis - QuickView, CVEs and Recommendations status is ${{ job.status }}."
+
     # Docker Scout display a quickview, cves, recommendations output
       - name: Analyze for critical and high CVEs
         id: docker-scout-cves
@@ -137,9 +144,9 @@ jobs:
     # Upload VEX json file
       - name: Upload Vex document
         if: always()
-        uses: actions/upload-artifact@v2
-        
+        uses: actions/upload-artifact@v4
         with:
             name: Vex document
-            path: "/example.vex.json"
+            #path: "/example.vex.json"
+            path: "attachments/example.vex.json"
       - run: echo "✅ Upload VEX Document status is ${{ job.status }}."
