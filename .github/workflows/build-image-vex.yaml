@@ -138,6 +138,7 @@ jobs:
             path: "attachments/in-toto.vex.json"
       - run: echo "✅ Upload VEX Document status is ${{ job.status }}."
 
+
       # Docker Scout Attach the in-toto.vex.json VEX document as an attestation:
       - name: Attach the in-toto.vex.json VEX document as an attestation
         id: docker-scout-attestation
