@@ -145,11 +145,10 @@ jobs:
             path: "attachments/in-toto.vex.json"
       - run: echo "✅ Upload VEX Document status is ${{ job.status }}."
 
-
+    
       # Docker Scout Attach the in-toto.vex.json VEX document as an attestation:
-      - name: Attach the in-toto.vex.json VEX document as an attestation
+      - name: dockerscoutattestation
         id: docker-scout-attestation
-        if: ${{ github.event_name != 'pull_request_target' }}
         uses: docker/scout-action@v1.6.3
         with:
           command: docker scout attestation add
@@ -157,4 +156,3 @@ jobs:
             --predicate-type https://openvex.dev/ns/v0.2.0 \
             artofthepossible/containerconveyervex:v1
       - run: echo "✅ Docker Scout Attestations Attached status is ${{ job.status }}."
-  
