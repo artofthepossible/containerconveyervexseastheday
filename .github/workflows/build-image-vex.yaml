@@ -126,21 +126,7 @@ jobs:
       - run: vexctl version
       - run: echo "✅ Install vexctl and test presence status is ${{ job.status }}."
     
-    # Run-vexctl - Run vexctl 
-      - name: Run vexctl
-        id: Run-vexctl
-        uses: openvex/generate-vex@main
-      #  with:
-      #      product: pkg:generic/hello@${{ env.RELEASE_VERSION }}
-      #- run: vexctl create "pkg:generic/product@1.0.0" CVE-2023-5752 fixed 
-      #- run: vexctl generate --product="pkg:apk/wolfi/git" \
-      #       --vuln="CVE-2023-5752" \
-      #       --status="fixed"
-      - run: sudo ./vexctl create --product="pkg:pypi/blinker-1.7.0" \
-             --vuln="CVE-2023-5752" \
-             --status="fixed"
-      - run: echo "✅ Run VEX status is ${{ job.status }}."
-
+  
 
     
     # Upload VEX json file
@@ -151,5 +137,6 @@ jobs:
             name: Vex document
             #path: "/example.vex.json"
             #path: "attachments/example.vex.json"
-            path: "attachments/CVE-2023-5752.vex.json"
+            #path: "attachments/CVE-2023-5752.vex.json"
+            path: "attachments/in-toto.vex.json"
       - run: echo "✅ Upload VEX Document status is ${{ job.status }}."
