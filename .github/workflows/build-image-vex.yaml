@@ -134,7 +134,7 @@ jobs:
       #      product: pkg:generic/hello@${{ env.RELEASE_VERSION }}
       #- run: vexctl create "pkg:generic/product@1.0.0" CVE-2023-5752 fixed 
       #- run: vexctl generate "pkg:apk/wolfi/git" CVE-2023-5752 fixed
-      - run: ./vexctl create \
+      - run: sudo ./vexctl create \
               --author="author@example.com" \
               --product="pkg:docker/artofthepossible/containerconveyervex@v1" \
               --subcomponents="pkg:pip-23.0.1" \ 
